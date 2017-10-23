@@ -24,6 +24,7 @@ public class RESTMain {
 				.target(REST_URL)
 				.request(MediaType.APPLICATION_XML)
 				.get();
+		//
 				
 		
 		//process the response object
