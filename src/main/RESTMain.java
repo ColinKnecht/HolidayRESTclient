@@ -3,6 +3,7 @@ package main;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.StatusType;
 
 /**
  * Calls the RESTful web service at REST_URL defined below
@@ -24,11 +25,18 @@ public class RESTMain {
 				.target(REST_URL)
 				.request(MediaType.APPLICATION_XML)
 				.get();
-		//
+		
 				
 		
 		//process the response object
-
+		StatusType status = response.getStatusInfo();
+		int statusCode = status.getStatusCode();
+		if (statusCode == OK_STATUS) {
+			System.out.println(response.readEntity(String.class));
+		} else {
+			System.out.printf("Service resturned status: \"%d %s \" \n", statusCode, status.getReasonPhrase());
+		}
+		
 	}
 
 }
